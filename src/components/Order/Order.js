@@ -5,11 +5,13 @@ import useProducts from "../../hooks/useProduct";
 import Cart from "../Cart/Cart";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import { removeFromDb } from "../../utilities/fakedb";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Order = () => {
   const [products, setProducts] = useProducts();
   const [cart, setCart] = useCart(products);
+
+  const navigat = useNavigate();
 
   const removedProduct = (product) => {
     const rest = cart.filter((p) => p.id !== product.id);
@@ -26,9 +28,7 @@ const Order = () => {
         </div>
         <div className="cart-container">
           <Cart cart={cart}>
-            <Link to="/inventory">
-              <button>Proceed Checkout</button>
-            </Link>
+            <button onClick={() => navigat("/shipment")}>Proceed Shipping</button>
           </Cart>
         </div>
       </div>
